@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크래핑 연습 상점</title>
+    <style>
+        body {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px;
+            color: #222;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        header, section, footer {
+            margin-bottom: 32px;
+        }
+
+        nav a {
+            margin-right: 16px;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #c0392b;
+        }
+
+        .original-price {
+            margin-left: 8px;
+            color: #777;
+            text-decoration: line-through;
+        }
+
+        .sold-out {
+            color: #777;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header id="site-header">
+        <h1>스크래핑 연습 상점</h1>
+        <p class="description">BeautifulSoup으로 상품과 공지 데이터를 추출해 보세요.</p>
+        <nav aria-label="주요 메뉴">
+            <a href="/home">홈</a>
+            <a href="/products">상품</a>
+            <a href="/notices">공지사항</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="products">
+            <h2>인기 상품</h2>
+            <div class="product-list">
+                <article class="product-card featured" data-product-id="P001" data-category="book">
+                    <h3 class="product-name">
+                        <a href="/products/P001">파이썬 데이터 수집 입문</a>
+                    </h3>
+                    <p class="category">도서</p>
+                    <p>
+                        <span class="price" data-price="27000">27,000원</span>
+                        <span class="original-price">30,000원</span>
+                    </p>
+                    <p class="rating" data-rating="4.8">평점 4.8</p>
+                    <p class="stock in-stock">재고 있음</p>
+                    <ul class="tags">
+                        <li>Python</li>
+                        <li>BeautifulSoup</li>
+                    </ul>
+                </article>
+
+                <article class="product-card" data-product-id="P002" data-category="course">
+                    <h3 class="product-name">
+                        <a href="/products/P002">웹 스크래핑 온라인 강의</a>
+                    </h3>
+                    <p class="category">온라인 강의</p>
+                    <p><span class="price" data-price="45000">45,000원</span></p>
+                    <p class="rating" data-rating="4.6">평점 4.6</p>
+                    <p class="stock in-stock">재고 있음</p>
+                    <ul class="tags">
+                        <li>Requests</li>
+                        <li>CSS Selector</li>
+                    </ul>
+                </article>
+
+                <article class="product-card sold-out" data-product-id="P003" data-category="device">
+                    <h3 class="product-name">
+                        <a href="/products/P003">개발자용 미니 키보드</a>
+                    </h3>
+                    <p class="category">주변기기</p>
+                    <p><span class="price" data-price="89000">89,000원</span></p>
+                    <!-- 평점이 없는 상품: 누락된 요소 처리 연습용 -->
+                    <p class="stock out-of-stock">품절</p>
+                    <ul class="tags">
+                        <li>Keyboard</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="notices">
+            <h2>공지사항</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-notice-id="N003">
+                        <td>3</td>
+                        <td><a href="/notices/N003">추석 배송 일정 안내</a></td>
+                        <td><time datetime="2026-09-15">2026.09.15</time></td>
+                    </tr>
+                    <tr data-notice-id="N002">
+                        <td>2</td>
+                        <td><a href="/notices/N002">신규 강의 출시</a></td>
+                        <td><time datetime="2026-09-10">2026.09.10</time></td>
+                    </tr>
+                    <tr data-notice-id="N001">
+                        <td>1</td>
+                        <td><a href="/notices/N001">사이트 이용 안내</a></td>
+                        <td><time datetime="2026-09-01">2026.09.01</time></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reviews">
+            <h2>최근 후기</h2>
+            <div class="review" data-review-id="R101">
+                <strong class="author">김코딩</strong>
+                <span class="score">5</span>
+                <p class="comment">예제가 이해하기 쉽고 실습하기 좋았습니다.</p>
+            </div>
+            <div class="review" data-review-id="R102">
+                <strong class="author">이데이터</strong>
+                <span class="score">4</span>
+                <p class="comment">CSS 선택자 설명이 유용했습니다.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="copyright">&copy; 2026 Scraping Practice Shop</p>
+        <a class="contact" href="mailto:study@example.com">문의하기</a>
+    </footer>
+</body>
+</html>
