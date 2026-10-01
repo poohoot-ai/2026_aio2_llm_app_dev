@@ -32,4 +32,5 @@ dependencies = [
     "tabulate>=0.10.0",
     "pymupdf>=1.28.2",
     "pymupdf4llm>=1.28.2",
+    "flashrank>=0.2.10",
 ]
